@@ -1,19 +1,18 @@
 import React from 'react';
 import Cell from './Cell';
 
-const Grid = () => {
-	const tmp_rows = Array.from({ length: 60 });
-	const tmp_columns = Array.from({ length: 30 });
-
+const Grid = ({ grid }) => {
 	return (
 		<div className="border border-yellow-500 p-1 flex flex-wrap gap-1">
-			{tmp_rows.map((_, rowIndex) => (
-				<div key={rowIndex}>
-					{tmp_columns.map((_, colIndex) => (
-						<Cell key={`${rowIndex}-${colIndex}`} />
-					))}
-				</div>
-			))}
+			{grid
+				? grid.map((row, rowIndex) => (
+						<div key={rowIndex}>
+							{row.map((element, colIndex) => (
+								<Cell type={element.type} key={`${rowIndex}-${colIndex}`} />
+							))}
+						</div>
+				  ))
+				: 'Wygeneruj mapę'}
 		</div>
 	);
 };
