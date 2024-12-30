@@ -1,13 +1,51 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Grid from './components/Grid';
 import ControlPanel from './components/ControlPanel';
 import generateGrid from './functions/generateGrid';
+import simulateFire from './functions/simulateFire';
 
 function App() {
 	const [p, setP] = useState(0.4);
 	const [factor, setFactor] = useState(0.1);
 	const [speed, setSpeed] = useState(1);
-	const [grid, setGrid] = useState();
+	const [grid, setGrid] = useState(() => generateGrid());
+	const [gridCopy, setGridCopy] = useState();
+
+	const [isRunning, setIsRunning] = useState(false);
+	const generatorRef = useRef(null);
+
+	const [counter, setCounter] = useState(0);
+
+	useEffect(() => {
+		if (isRunning) {
+			const interval = setInterval(() => {
+				const { value, done } = generatorRef.current.next();
+				setCounter((prevCounter) => prevCounter + 1);
+				if (!done) {
+					setGrid(value);
+				} else {
+					clearInterval(interval);
+					setIsRunning(false);
+				}
+			}, 1000 / speed);
+
+			return () => clearInterval(interval);
+		}
+	}, [isRunning]);
+
+	const startSimulation = () => {
+		setGridCopy(grid);
+		generatorRef.current = simulateFire(grid, p, factor);
+		setIsRunning(true);
+	};
+
+	const stopSimulation = () => {
+		setIsRunning(false);
+	};
+
+	const generateGridFn = () => {
+		setGrid(() => generateGrid());
+	};
 
 	return (
 		<>
@@ -23,8 +61,16 @@ function App() {
 					setFactor={setFactor}
 					speed={speed}
 					setSpeed={setSpeed}
-					generateFn={generateGrid}
+					generateFn={generateGridFn}
 					setGrid={setGrid}
+					gridCopy={gridCopy}
+					setGridCopy={setGridCopy}
+					startFn={startSimulation}
+					stopFn={stopSimulation}
+					isRunning={isRunning}
+					setIsRunning={setIsRunning}
+					counter={counter}
+					setCounter={setCounter}
 				/>
 				<Grid grid={grid} />
 			</div>
