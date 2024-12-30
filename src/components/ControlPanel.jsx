@@ -1,5 +1,11 @@
 import React from 'react';
-import { Input, Button } from '@headlessui/react';
+
+import {
+	IconDice3Filled,
+	IconPlayerPauseFilled,
+	IconPlayerPlayFilled,
+} from '@tabler/icons-react';
+import '../index.css';
 
 const ControlPanel = ({
 	p,
@@ -11,64 +17,76 @@ const ControlPanel = ({
 	generateFn,
 	setGrid,
 }) => {
+	const inputStyles =
+		'w-[50%] rounded-md text-center h-7 border border-gray-400 shadow-md ';
+	const buttonStyles =
+		'shadow-md rounded-md h-10 flex justify-center items-center gap-2 text-white bg-blue-500 hover:bg-blue-400';
+
 	return (
-		<div className="border border-blue-500 flex flex-col gap-3">
+		//"border border-blue-500 flex flex-col gap-3"
+		<div className="border-r-gray-400 border-r-2 flex flex-col gap-3 pr-1">
 			<div>Ustawienia & Legenda</div>
-			<div className="border border-emerald-500">
+			{/*"border border-emerald-500"*/}
+			<div>
 				<p>Wartość p</p>
-				<Input
+				<input
 					type="number"
 					defaultValue={p}
 					step={0.1}
 					max={1}
 					min={0}
 					onChange={(e) => setP(e.currentTarget.value)}
-					className="w-full"
+					className={inputStyles}
 				/>
 			</div>
-			<div className="border border-orange-500">
+			<div>
 				<p>Współczynik</p>
-				<Input
+				<input
 					type="number"
 					defaultValue={factor}
 					step={0.1}
 					max={1}
 					min={0}
 					onChange={(e) => setFactor(e.currentTarget.value)}
-					className="w-full"
+					className={inputStyles}
 				/>
 			</div>
-			<div className="border border-pink-300">
+			<div>
 				<p>Prędkość</p>
-				<Input
+				<input
 					type="number"
 					defaultValue={speed}
 					step={0.25}
 					min={0.25}
 					max={2}
 					onChange={(e) => setSpeed(e.currentTarget.value)}
-					className="w-full"
+					className={inputStyles}
 				/>
 			</div>
-			<Button
-				className="border border-blue-800"
+			<button
+				className={buttonStyles}
 				onClick={() => {
 					setGrid(() => generateFn());
 				}}
 			>
+				<IconDice3Filled size={19} />
 				Generuj
-			</Button>
-			<Button
-				className="border border-blue-800"
+			</button>
+			<button
+				className={buttonStyles}
 				onClick={() => {
 					console.log('p', p);
 					console.log('factor', factor);
 					console.log('speed', speed);
 				}}
 			>
+				<IconPlayerPlayFilled size={19} />
 				Start
-			</Button>
-			<Button className="border border-blue-800">Stop</Button>
+			</button>
+			<button className={buttonStyles}>
+				<IconPlayerPauseFilled size={19} />
+				Stop
+			</button>
 		</div>
 	);
 };

@@ -3,7 +3,7 @@ import Cell from './Cell';
 
 const Grid = ({ grid }) => {
 	return (
-		<div className="border border-yellow-500 p-1 flex flex-wrap gap-1">
+		<div className="p-1 flex flex-wrap gap-1">
 			{grid
 				? grid.map((row, rowIndex) => (
 						<div key={rowIndex}>

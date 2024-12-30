@@ -18,10 +18,16 @@ const Cell = ({ type }) => {
 		<div
 			className={`w-[24px] h-[24px] ${cellBackground} flex justify-center items-center mt-1`}
 		>
-			{type === 3 && <IconBackground size={16} />}
-			{type === 0 && <IconChristmasTreeFilled size={16} />}
-			{type === 1 && <IconChristmasTreeFilled size={16} />}
-			{type === 2 && <IconChristmasTreeFilled size={16} />}
+			{type === 3 && <IconBackground size={16} className="text-amber-900" />}
+			{type === 0 && (
+				<IconChristmasTreeFilled size={16} className="text-teal-900" />
+			)}
+			{type === 1 && (
+				<IconChristmasTreeFilled size={16} className="text-red-900" />
+			)}
+			{type === 2 && (
+				<IconChristmasTreeFilled size={16} className="text-gray-900" />
+			)}
 		</div>
 	);
 };

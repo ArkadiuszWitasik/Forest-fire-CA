@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Grid from './components/Grid';
 import ControlPanel from './components/ControlPanel';
 import generateGrid from './functions/generateGrid';
-import { Button } from '@headlessui/react';
 
 function App() {
 	const [p, setP] = useState(0.4);
@@ -12,11 +11,11 @@ function App() {
 
 	return (
 		<>
-			<div className="mt-3 border border-red-500 flex flex-col items-center">
+			<div className="mt-3 flex flex-col items-center">
 				<div className="text-6xl">Pożar lasu</div>
 				<div className="text-5xl">Automat komórkowy</div>
 			</div>
-			<div className="mx-3 border border-green-500 flex gap-3">
+			<div className="mx-3 flex gap-1">
 				<ControlPanel
 					p={p}
 					setP={setP}
