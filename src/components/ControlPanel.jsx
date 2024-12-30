@@ -49,7 +49,8 @@ const ControlPanel = ({
 				/>
 			</div>
 			<div>
-				<p>Współczynik</p>
+				<p>Współczynnik</p>
+				<p>palącego się drzewa</p>
 				<input
 					disabled={isRunning}
 					type="number"
@@ -62,7 +63,7 @@ const ControlPanel = ({
 				/>
 			</div>
 			<div>
-				<p>Prędkość</p>
+				<p>Prędkość animacji</p>
 				<input
 					disabled={isRunning}
 					type="number"

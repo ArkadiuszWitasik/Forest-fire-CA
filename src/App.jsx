@@ -5,7 +5,7 @@ import generateGrid from './functions/generateGrid';
 import simulateFire from './functions/simulateFire';
 
 function App() {
-	const [p, setP] = useState(0.4);
+	const [p, setP] = useState(0.6);
 	const [factor, setFactor] = useState(0.1);
 	const [speed, setSpeed] = useState(1);
 	const [grid, setGrid] = useState(() => generateGrid());
